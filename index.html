@@ -538,6 +538,134 @@
         }
 
         footer strong { color: white; }
+
+        /* ─── VIEW TOGGLE ─────────────────────────────────── */
+        .view-toggle {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(103,40,190,0.1);
+            margin-bottom: 12px;
+        }
+
+        .toggle-btn {
+            padding: 7px 22px;
+            border-radius: 20px;
+            border: 2px solid rgba(103,40,190,0.22);
+            background: white;
+            color: var(--purple);
+            font-family: var(--font);
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .toggle-btn:hover { border-color: var(--purple); background: rgba(103,40,190,0.04); }
+
+        .toggle-btn.active {
+            background: var(--gradient);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 4px 14px rgba(103,40,190,0.3);
+        }
+
+        /* ─── COMPARISON VIEW ─────────────────────────────── */
+        .comparison-view { display: none; }
+
+        .comp-intro {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 16px;
+        }
+
+        .comp-card {
+            background: white;
+            border-radius: 20px;
+            padding: 26px 18px 22px;
+            box-shadow: 0 4px 24px rgba(103,40,190,0.09);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            border-top: 5px solid var(--purple);
+        }
+
+        .comp-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 16px 44px rgba(103,40,190,0.18);
+        }
+
+        .comp-img {
+            width: 78px; height: 78px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid white;
+            box-shadow: 0 4px 14px rgba(103,40,190,0.2);
+            margin-bottom: 14px;
+            background: #ede9fe;
+            flex-shrink: 0;
+        }
+
+        .comp-img img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+
+        .comp-name  { font-size: 24px; font-weight: 800; color: var(--purple); margin-bottom: 4px; }
+        .comp-title { font-size: 12.5px; font-weight: 700; color: var(--magenta); margin-bottom: 3px; line-height: 1.4; }
+        .comp-sub   { font-size: 10px; font-weight: 600; color: var(--magenta); opacity: 0.55; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 18px; }
+
+        .spectrum-bars { width: 100%; margin-bottom: 16px; }
+
+        .bar-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 7px;
+        }
+
+        .bar-label {
+            font-size: 10px; font-weight: 700; color: var(--purple);
+            min-width: 44px; text-align: right;
+        }
+
+        .bar-track {
+            flex: 1; height: 6px; background: #ede9fe; border-radius: 3px; overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%; border-radius: 3px;
+            background: var(--gradient);
+            transition: width 0.7s cubic-bezier(.4,0,.2,1);
+        }
+
+        .comp-divider { width: 36px; height: 3px; background: var(--gradient); border-radius: 2px; margin: 0 auto 14px; }
+
+        .comp-pain {
+            font-size: 12px; color: #881337; background: #fff1f2;
+            border-radius: 10px; padding: 9px 11px; margin-bottom: 8px;
+            width: 100%; text-align: right; line-height: 1.55;
+        }
+
+        .comp-gain {
+            font-size: 12px; color: #064e3b; background: #f0fdf4;
+            border-radius: 10px; padding: 9px 11px;
+            width: 100%; text-align: right; line-height: 1.55; font-weight: 600;
+        }
+
+        .comp-cta {
+            margin-top: 14px;
+            font-size: 11px;
+            color: var(--purple);
+            opacity: 0.5;
+            font-weight: 600;
+        }
     </style>
 </head>
 <body>
@@ -551,6 +679,10 @@
 
 <!-- NAV -->
 <nav class="sticky-nav">
+    <div class="view-toggle">
+        <button class="toggle-btn active" id="btn-single" onclick="setView('single')">👤 פרסונה בודדת</button>
+        <button class="toggle-btn" id="btn-compare" onclick="setView('compare')">⚖️ השוואה מלאה</button>
+    </div>
     <div class="nav-inner" id="nav"></div>
 </nav>
 
@@ -654,6 +786,16 @@
         </div>
 
     </div>
+
+        <!-- COMPARISON VIEW -->
+        <div class="comparison-view" id="comparison-view">
+            <div class="comp-intro">
+                <div class="panel-title" style="justify-content:center;margin-bottom:6px">⚖️ השוואה בין כל הפרסונות</div>
+                <p class="panel-sub">לחצי על כרטיס כדי לפתוח את הפרופיל המלא</p>
+            </div>
+            <div class="comparison-grid" id="comparison-grid"></div>
+        </div>
+
 </main>
 
 <footer>
@@ -863,6 +1005,70 @@
         chart.data.datasets[0].data  = data;
         chart.data.datasets[0].label = `פרופיל – ${name}`;
         chart.update();
+    }
+
+    /* View toggle */
+    function setView(mode) {
+        const single  = document.getElementById('view');
+        const compare = document.getElementById('comparison-view');
+        const nav     = document.getElementById('nav');
+        const btnS    = document.getElementById('btn-single');
+        const btnC    = document.getElementById('btn-compare');
+
+        if (mode === 'compare') {
+            single.style.display  = 'none';
+            compare.style.display = 'block';
+            nav.style.display     = 'none';
+            btnS.classList.remove('active');
+            btnC.classList.add('active');
+            renderComparison();
+        } else {
+            single.style.display  = 'block';
+            compare.style.display = 'none';
+            nav.style.display     = 'flex';
+            btnS.classList.add('active');
+            btnC.classList.remove('active');
+        }
+    }
+
+    /* Build comparison cards */
+    function renderComparison() {
+        const grid = document.getElementById('comparison-grid');
+        if (grid.children.length > 0) return;
+
+        const axes = ['מיקוד', 'סיכון', 'שיווק', 'בשלות'];
+
+        PERSONAS.forEach(p => {
+            const card = document.createElement('div');
+            card.className = 'comp-card';
+            card.title = `פתח פרופיל מלא של ${p.name}`;
+            card.onclick = () => { setView('single'); pick(p.id); };
+
+            const bars = axes.map((ax, i) => `
+                <div class="bar-row">
+                    <span class="bar-label">${ax}</span>
+                    <div class="bar-track">
+                        <div class="bar-fill" style="width:${p.spectrum[i]}%"></div>
+                    </div>
+                </div>`).join('');
+
+            const fallback = `https://ui-avatars.com/api/?name=${encodeURIComponent(p.name)}&background=ede9fe&color=6728be&size=200&bold=true`;
+
+            card.innerHTML = `
+                <div class="comp-img">
+                    <img src="${p.img}" alt="${p.name}" onerror="this.onerror=null;this.src='${fallback}'">
+                </div>
+                <div class="comp-name">${p.name}</div>
+                <div class="comp-title">${p.title}</div>
+                <div class="comp-sub">${p.subtitle}</div>
+                <div class="spectrum-bars">${bars}</div>
+                <div class="comp-divider"></div>
+                <div class="comp-pain">${p.empathy.pains}</div>
+                <div class="comp-gain">${p.empathy.gains}</div>
+                <div class="comp-cta">← לחצי לפרופיל מלא</div>`;
+
+            grid.appendChild(card);
+        });
     }
 
     /* Boot */
