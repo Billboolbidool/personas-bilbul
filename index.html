@@ -528,6 +528,72 @@
         .pain-text { font-size: 13.5px; color: #881337; line-height: 1.7; opacity: 0.88; }
         .gain-text { font-size: 13.5px; color: #064e3b; line-height: 1.7; font-weight: 600; }
 
+        /* ─── IDEAL CLIENT SECTION ────────────────────────── */
+        .ideal-client-section {
+            max-width: 1100px;
+            margin: 40px auto 8px;
+            padding: 0 20px;
+        }
+
+        .ideal-header { margin-bottom: 24px; }
+
+        .ideal-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 18px;
+        }
+
+        @media (min-width: 768px) {
+            .ideal-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        .ideal-card {
+            background: white;
+            border-radius: 20px;
+            padding: 26px 24px;
+            box-shadow: 0 4px 24px rgba(103,40,190,0.09);
+            border-top: 6px solid var(--purple);
+        }
+
+        .ideal-card.mid { border-top-color: var(--magenta); }
+
+        .ideal-card-title {
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--purple);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 4px;
+        }
+
+        .ideal-card.mid .ideal-card-title { color: var(--magenta); }
+
+        .ideal-card-sub {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            padding-right: 48px;
+        }
+
+        .ideal-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .ideal-item { font-size: 13.5px; line-height: 1.65; color: var(--text-muted); }
+
+        .ideal-item strong {
+            display: block;
+            color: var(--text-dark);
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 2px;
+        }
+
         /* ─── FOOTER ──────────────────────────────────────── */
         footer {
             background: var(--purple);
@@ -676,6 +742,45 @@
     <h1 class="header-title">גלריית <span>פרסונות</span></h1>
     <p class="header-sub">הכירו את קהל היעד לעומק — מאפיינים, סרגל התנהגות, ומפת אמפתיה מלאה לכל פרופיל</p>
 </header>
+
+<!-- IDEAL CLIENT -->
+<section class="ideal-client-section">
+    <div class="ideal-header">
+        <div class="panel-title" style="justify-content:center">✨ הלקוחה האידיאלית שלנו</div>
+        <p class="panel-sub" style="text-align:center">לא מי היא כרגע — אלא מי שהיא שואפת להיות, ואיך היא בוחרת לפעול. אלה המאפיינים המשותפים לכל אישה שמתאימה באופן אידיאלי ל"מרחב", מעבר לכל פרסונה בודדת.</p>
+    </div>
+    <div class="ideal-grid">
+        <div class="ideal-card">
+            <div class="ideal-card-title"><span class="eq-icon pi">🎯</span> החזון העסקי והאישי שלה</div>
+            <p class="ideal-card-sub">מה היא רוצה לבנות?</p>
+            <ul class="ideal-list">
+                <li class="ideal-item"><strong>בניית מורשת ודרך, לא רק הכנסה</strong>שואפת לעסק משמעותי לטווח ארוך – שהיא גאה בו, שיש לו השפעה ודרך, ומתאים באופן מלא לערכים שלה. "עסק שהיא רוצה לחיות בתוכו".</li>
+                <li class="ideal-item"><strong>רכישת זהות של מנהיגה ("הקפטנית")</strong>שינוי זהות – מ"למדה שיווק/מיתוג" לאישה שמנהלת ומובילה את העסק שלה בביטחון, גם כשתנאי השוק משתנים.</li>
+                <li class="ideal-item"><strong>שאיפה לבידול ואותנטיות ("Lovemark")</strong>להפוך לאוטוריטה ייחודית בתחומה, לבטא קול אותנטי, ולהימנע מתוכן בנאלי או "פלסטי".</li>
+                <li class="ideal-item"><strong>בניית יסודות חזקים (Skyscraper)</strong>עסק יציב ועמיד לאורך שנים – כמו גורד שחקים בעל יסודות עמוקים, לא עסק שנשען על טרנדים חולפים.</li>
+            </ul>
+        </div>
+        <div class="ideal-card mid">
+            <div class="ideal-card-title"><span class="eq-icon mi">🌱</span> מוכנות לתהליך</div>
+            <p class="ideal-card-sub">מה היא מוכנה לעשות?</p>
+            <ul class="ideal-list">
+                <li class="ideal-item"><strong>מעבר מצריכת ידע לעשייה בפועל</strong>מוכנה להפסיק לצרוך קורסים ותיאוריות באופן פסיבי, ולהתחיל לבנות, לחקור וליישם בפועל.</li>
+                <li class="ideal-item"><strong>הסכמה לתנועה בצעדים קטנים (קאיזן)</strong>מבינה שעסק יציב לא נבנה בקפיצות ענק או קיצורי דרך – מאמצת צעדים קטנים, ניסויים ואיטרציות.</li>
+                <li class="ideal-item"><strong>פתיחות לניסוי וטעייה</strong>מוכנה להתנסות ולפרסם גם כשאין ביטחון מלא או כשהתוצאה עדיין לא מושלמת – שחרור הפרפקציוניזם.</li>
+                <li class="ideal-item"><strong>פיתוח יכולת חשיבה עצמאית</strong>לא מחפשת נוסחת קסם, אלא רוצה לפתח את השריר המחשבתי שיאפשר לה למצוא תשובות נכונות בעצמה שוב ושוב.</li>
+            </ul>
+        </div>
+        <div class="ideal-card">
+            <div class="ideal-card-title"><span class="eq-icon pi">🤝</span> שותפות וקהילתיות</div>
+            <p class="ideal-card-sub">איך היא פועלת במרחב המשותף?</p>
+            <ul class="ideal-list">
+                <li class="ideal-item"><strong>נתינה וקבלת פידבק פתוח</strong>מוכנה לשתף בתהליכים שלה, להציג עבודה, לקבל פידבק מקצועי וכנה מבעלות עסקים אחרות – ולהעניק פידבק דומה.</li>
+                <li class="ideal-item"><strong>אמונה בכוחה של סביבה תומכת</strong>מבינה שלעשות זאת לבד זה קשה, ורוצה להיות מוקפת בנשים סקרניות, טובות ומפרגנות שבונות יחד איתה.</li>
+                <li class="ideal-item"><strong>מחויבות הדדית (Skin in the Game)</strong>מוכנה להשקיע זמן, משאבים ואנרגיה כדי להבטיח את הצלחת התהליך שלה ושל קבוצת המייסדות.</li>
+            </ul>
+        </div>
+    </div>
+</section>
 
 <!-- NAV -->
 <nav class="sticky-nav">
